@@ -4,7 +4,9 @@ This flutter project shows how to use receive_sharing_intent package to receive 
 
 ## Getting Started
 
-This project is a showcase for receiving text & files when application is opened & closed. IT shows how to use this package's different methods.
+This project is a showcase for receiving text & files when application is opened & closed. It shows how to use this package's different methods. For futher understanding,please refer below link.
+
+[Flutter receive intent](https://youtu.be/mtGYYlK8Ofc)
 
 Resources for the reference:
 

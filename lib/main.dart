@@ -1,5 +1,6 @@
 import 'dart:async';
-
+import 'dart:io';
+import 'package:path_provider/path_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:receive_sharing_intent/receive_sharing_intent.dart';
 
@@ -30,9 +31,51 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   StreamSubscription<String>? _textStreamSubscription;
   StreamSubscription<List<SharedMediaFile>>? _mediaStreamSubscription;
+  List<String> _textList = [];
 
+  // Function to add _sharedText to a list if it is not already present
+  void _addTextToListIfUnique() {
+    if (!_textList.contains(_sharedText)) {
+      setState(() {
+        _textList.add(_sharedText);
+
+        _saveListToStorage(_textList);
+      });
+    }
+  }
+
+  Future<void> _saveListToStorage(List<String> list) async {
+    final file = File('${(await getApplicationDocumentsDirectory()).path}/shared_text_list.txt');
+    final sink = file.openWrite();
+    for (final item in list) {
+      sink.writeln(item);
+    }
+
+    await sink.close();
+  }
+
+  Future<List<String>> _loadListFromStorage() async {
+    final file = File('${(await getApplicationDocumentsDirectory()).path}/shared_text_list.txt');
+
+    if (await file.exists()) {
+      final contents = await file.readAsString();
+      return contents.split('\n');
+    }
+    Future<void> _saveListToStorage(List<String> list) async {
+      final file = File('${(await getApplicationDocumentsDirectory()).path}/shared_text_list.txt');
+      final sink = file.openWrite();
+
+      for (final item in list) {
+        sink.writeln(item);
+      }
+
+      await sink.close();
+    }
+    return [];
+  }
   String _sharedText = "";
   List<SharedMediaFile>? _sharedFiles;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -77,11 +120,18 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
 
+    _loadListFromStorage().then((value) {
+      setState(() {
+        _textList = value;
+      });
+    });
+
     //Receive text data when app is running
     _textStreamSubscription =
         ReceiveSharingIntent.getTextStream().listen((String text) {
           setState(() {
             _sharedText = text;
+            _addTextToListIfUnique();
           });
         });
 
@@ -90,6 +140,7 @@ class _MyHomePageState extends State<MyHomePage> {
       if (text != null) {
         setState(() {
           _sharedText = text;
+          _addTextToListIfUnique();
         });
       }
     });
@@ -104,11 +155,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
     //Receive files when app is closed
     ReceiveSharingIntent.getInitialMedia().then((List<SharedMediaFile> files) {
-      if (files != null) {
-        setState(() {
-          _sharedFiles = files;
-        });
-      }
+      setState(() {
+        _sharedFiles = files;
+      });
     });
   }
 

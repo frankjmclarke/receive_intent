@@ -28,12 +28,11 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  StreamSubscription? _dataStreamSubscription;
+  StreamSubscription<String>? _textStreamSubscription;
+  StreamSubscription<List<SharedMediaFile>>? _mediaStreamSubscription;
 
   String _sharedText = "";
-
   List<SharedMediaFile>? _sharedFiles;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,22 +47,26 @@ class _MyHomePageState extends State<MyHomePage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              "Shared Text is :",
+              "Shared Text:",
               style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
             ),
             const SizedBox(
               width: 5,
             ),
-            Text(_sharedText, style: const TextStyle(fontSize: 20)),
+            if (_sharedText!.isNotEmpty)
+              Text(_sharedText, style: const TextStyle(fontSize: 20)),
+            if (_sharedText!.isEmpty)
+              const Text("No shared Text", style: TextStyle(fontSize: 20)),
             const SizedBox(height: 100),
             const Text("Shared files:",
                 style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
             const SizedBox(
               width: 5,
             ),
-            if (_sharedFiles != null)
-              Text(_sharedFiles!.map((f) => f.path).join(",") ?? "",
-                  style: const TextStyle(fontSize: 20)),
+            if (_sharedFiles != null && _sharedFiles!.isNotEmpty)
+              Text(_sharedFiles!.map((f) => f.path).join(", "), style: const TextStyle(fontSize: 20)),
+            if (_sharedFiles == null || _sharedFiles!.isEmpty)
+              const Text("No shared files", style: TextStyle(fontSize: 20)),
           ],
         ),
       ),
@@ -75,12 +78,12 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
 
     //Receive text data when app is running
-    _dataStreamSubscription =
+    _textStreamSubscription =
         ReceiveSharingIntent.getTextStream().listen((String text) {
-      setState(() {
-        _sharedText = text;
-      });
-    });
+          setState(() {
+            _sharedText = text;
+          });
+        });
 
     //Receive text data when app is closed
     ReceiveSharingIntent.getInitialText().then((String? text) {
@@ -92,7 +95,7 @@ class _MyHomePageState extends State<MyHomePage> {
     });
 
     //Receive files when app is running
-    _dataStreamSubscription = ReceiveSharingIntent.getMediaStream()
+    _mediaStreamSubscription = ReceiveSharingIntent.getMediaStream()
         .listen((List<SharedMediaFile> files) {
       setState(() {
         _sharedFiles = files;
@@ -112,6 +115,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void dispose() {
     super.dispose();
-    _dataStreamSubscription!.cancel();
+    _mediaStreamSubscription!.cancel();
+    _textStreamSubscription!.cancel();
   }
 }

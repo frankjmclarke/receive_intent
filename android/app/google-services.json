@@ -1,0 +1,227 @@
+{
+  "project_info": {
+    "project_number": "804902657559",
+    "firebase_url": "https://nestneeded.firebaseio.com",
+    "project_id": "nestneeded",
+    "storage_bucket": "nestneeded.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:804902657559:android:ea151e387569a70894c652",
+        "android_client_info": {
+          "package_name": "com.example.receive_intent"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "804902657559-ivel9sb1fga3be7pu4pt7l940nfebp65.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_AuNJljknIA7C8-M8u5DVBAvx7fi_S-o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "804902657559-ivel9sb1fga3be7pu4pt7l940nfebp65.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "804902657559-13u0ieur300odk9r8rlhmm52b0dtgolj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.nestneeded.nestneeded"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:804902657559:android:5c7f96b1639b9aa494c652",
+        "android_client_info": {
+          "package_name": "com.example.schedular_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "804902657559-ivel9sb1fga3be7pu4pt7l940nfebp65.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_AuNJljknIA7C8-M8u5DVBAvx7fi_S-o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "804902657559-ivel9sb1fga3be7pu4pt7l940nfebp65.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "804902657559-13u0ieur300odk9r8rlhmm52b0dtgolj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.nestneeded.nestneeded"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:804902657559:android:67ba012980dfc15094c652",
+        "android_client_info": {
+          "package_name": "com.fclarke.com.crud"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "804902657559-ivel9sb1fga3be7pu4pt7l940nfebp65.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_AuNJljknIA7C8-M8u5DVBAvx7fi_S-o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "804902657559-ivel9sb1fga3be7pu4pt7l940nfebp65.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "804902657559-13u0ieur300odk9r8rlhmm52b0dtgolj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.nestneeded.nestneeded"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:804902657559:android:cd0c56414297161494c652",
+        "android_client_info": {
+          "package_name": "com.fclarke.crudtest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "804902657559-ivel9sb1fga3be7pu4pt7l940nfebp65.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_AuNJljknIA7C8-M8u5DVBAvx7fi_S-o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "804902657559-ivel9sb1fga3be7pu4pt7l940nfebp65.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "804902657559-13u0ieur300odk9r8rlhmm52b0dtgolj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.nestneeded.nestneeded"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:804902657559:android:b5b950ec8a4bb29494c652",
+        "android_client_info": {
+          "package_name": "com.fclarke.todo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "804902657559-ivel9sb1fga3be7pu4pt7l940nfebp65.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_AuNJljknIA7C8-M8u5DVBAvx7fi_S-o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "804902657559-ivel9sb1fga3be7pu4pt7l940nfebp65.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "804902657559-13u0ieur300odk9r8rlhmm52b0dtgolj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.nestneeded.nestneeded"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:804902657559:android:6dc9c73a21611bb294c652",
+        "android_client_info": {
+          "package_name": "com.nestneeded.nestneeded"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "804902657559-ivel9sb1fga3be7pu4pt7l940nfebp65.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_AuNJljknIA7C8-M8u5DVBAvx7fi_S-o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "804902657559-ivel9sb1fga3be7pu4pt7l940nfebp65.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "804902657559-13u0ieur300odk9r8rlhmm52b0dtgolj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.nestneeded.nestneeded"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

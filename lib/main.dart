@@ -100,20 +100,84 @@ class _MyHomePageState extends State<MyHomePage> {
               Text(_sharedText, style: const TextStyle(fontSize: 20)),
             if (_sharedText!.isEmpty)
               const Text("No shared Text", style: TextStyle(fontSize: 20)),
-            const SizedBox(height: 100),
-            const Text("Shared files:",
-                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
-            const SizedBox(
-              width: 5,
-            ),
-            if (_sharedFiles != null && _sharedFiles!.isNotEmpty)
-              Text(_sharedFiles!.map((f) => f.path).join(", "), style: const TextStyle(fontSize: 20)),
-            if (_sharedFiles == null || _sharedFiles!.isEmpty)
-              const Text("No shared files", style: TextStyle(fontSize: 20)),
+            const SizedBox(height: 20),
+            /*
+        const Text("Shared files:",
+            style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+        const SizedBox(
+          width: 5,
+        ),
+        if (_sharedFiles != null && _sharedFiles!.isNotEmpty)
+          Text(_sharedFiles!.map((f) => f.path).join(", "), style: const TextStyle(fontSize: 20)),
+        if (_sharedFiles == null || _sharedFiles!.isEmpty)
+          const Text("No saved links", style: TextStyle(fontSize: 20)),*/
+            if (_textList!.isNotEmpty)
+              const Text(
+                "Saved files:",
+                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+              ),
+            if (_textList!.isEmpty)
+              const Text(
+                "No saved files",
+                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+              ),
+            SizedBox(
+              height: 250,
+              child: LayoutBuilder(
+                builder: (BuildContext context, BoxConstraints constraints) {
+                  return SizedBox(
+                    child: ListView.builder(
+                      itemCount: _textList.length,
+                      itemBuilder: (context, index) {
+                        final item = _textList[index];
+                        return Dismissible(
+                          key: Key(item),
+                          onDismissed: (direction) {
+                            setState(() {
+                              _textList.removeAt(index);
+                            });
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text("Item deleted"),
+                                duration: Duration(seconds: 1),
+                              ),
+                            );
+                          },
+                          child: Card(
+                            elevation: 3, // set the elevation to create a shadow effect
+                            margin: const EdgeInsets.symmetric(vertical: 5),
+                            child: ListTile(
+                              title: TextFormField(
+                                initialValue: item,
+                                onChanged: (value) {
+                                  setState(() {
+                                    _textList[index] = value;
+                                  });
+                                },
+                              ),
+                              subtitle: TextFormField(
+                                initialValue: item.length.toString(),
+                                keyboardType: TextInputType.number,
+                                onChanged: (value) {
+                                  setState(() {
+                                    // _textList[index] = value;
+                                  });
+                                },
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  );
+                },
+              ),
+            )
           ],
         ),
       ),
     );
+
   }
 
   @override
@@ -132,6 +196,7 @@ class _MyHomePageState extends State<MyHomePage> {
           setState(() {
             _sharedText = text;
             _addTextToListIfUnique();
+
           });
         });
 

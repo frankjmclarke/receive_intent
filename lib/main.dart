@@ -45,7 +45,8 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Future<void> _saveListToStorage(List<String> list) async {
-    final file = File('${(await getApplicationDocumentsDirectory()).path}/shared_text_list.txt');
+    final file = File(
+        '${(await getApplicationDocumentsDirectory()).path}/shared_text_list.txt');
     final sink = file.openWrite();
     for (final item in list) {
       sink.writeln(item);
@@ -55,14 +56,16 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Future<List<String>> _loadListFromStorage() async {
-    final file = File('${(await getApplicationDocumentsDirectory()).path}/shared_text_list.txt');
+    final file = File(
+        '${(await getApplicationDocumentsDirectory()).path}/shared_text_list.txt');
 
     if (await file.exists()) {
       final contents = await file.readAsString();
       return contents.split('\n');
     }
     Future<void> _saveListToStorage(List<String> list) async {
-      final file = File('${(await getApplicationDocumentsDirectory()).path}/shared_text_list.txt');
+      final file = File(
+          '${(await getApplicationDocumentsDirectory()).path}/shared_text_list.txt');
       final sink = file.openWrite();
 
       for (final item in list) {
@@ -71,8 +74,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
       await sink.close();
     }
+
     return [];
   }
+
   String _sharedText = "";
   List<SharedMediaFile>? _sharedFiles;
 
@@ -97,8 +102,8 @@ class _MyHomePageState extends State<MyHomePage> {
               width: 5,
             ),
             if (_sharedText!.isNotEmpty)
-              Text(_sharedText, style: const TextStyle(fontSize: 20)),
-            if (_sharedText!.isEmpty)
+              Text(_sharedText, style: const TextStyle(fontSize: 20))
+            else
               const Text("No shared Text", style: TextStyle(fontSize: 20)),
             const SizedBox(height: 20),
             /*
@@ -115,8 +120,8 @@ class _MyHomePageState extends State<MyHomePage> {
               const Text(
                 "Saved files:",
                 style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-              ),
-            if (_textList!.isEmpty)
+              )
+            else
               const Text(
                 "No saved files",
                 style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
@@ -144,7 +149,8 @@ class _MyHomePageState extends State<MyHomePage> {
                             );
                           },
                           child: Card(
-                            elevation: 3, // set the elevation to create a shadow effect
+                            elevation: 3,
+                            // set the elevation to create a shadow effect
                             margin: const EdgeInsets.symmetric(vertical: 5),
                             child: ListTile(
                               title: TextFormField(
@@ -177,7 +183,6 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
     );
-
   }
 
   @override
@@ -193,12 +198,11 @@ class _MyHomePageState extends State<MyHomePage> {
     //Receive text data when app is running
     _textStreamSubscription =
         ReceiveSharingIntent.getTextStream().listen((String text) {
-          setState(() {
-            _sharedText = text;
-            _addTextToListIfUnique();
-
-          });
-        });
+      setState(() {
+        _sharedText = text;
+        _addTextToListIfUnique();
+      });
+    });
 
     //Receive text data when app is closed
     ReceiveSharingIntent.getInitialText().then((String? text) {

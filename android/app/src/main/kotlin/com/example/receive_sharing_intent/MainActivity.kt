@@ -1,4 +1,4 @@
-package com.example.receive_sharing_intent
+package com.fclarke.receive_intent
 
 import io.flutter.embedding.android.FlutterActivity
 

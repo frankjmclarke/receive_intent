@@ -5,10 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:receive_sharing_intent/receive_sharing_intent.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -16,13 +18,13 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(),
+      home: const MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key}) : super(key: key);
+  const MyHomePage({Key? key}) : super(key: key);
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -63,23 +65,13 @@ class _MyHomePageState extends State<MyHomePage> {
       final contents = await file.readAsString();
       return contents.split('\n');
     }
-    Future<void> _saveListToStorage(List<String> list) async {
-      final file = File(
-          '${(await getApplicationDocumentsDirectory()).path}/shared_text_list.txt');
-      final sink = file.openWrite();
 
-      for (final item in list) {
-        sink.writeln(item);
-      }
-
-      await sink.close();
-    }
 
     return [];
   }
 
   String _sharedText = "";
-  List<SharedMediaFile>? _sharedFiles;
+  //List<SharedMediaFile>? _sharedFiles;
 
   @override
   Widget build(BuildContext context) {
@@ -101,22 +93,11 @@ class _MyHomePageState extends State<MyHomePage> {
             const SizedBox(
               width: 5,
             ),
-            if (_sharedText!.isNotEmpty)
+            if (_sharedText.isNotEmpty)
               Text(_sharedText, style: const TextStyle(fontSize: 20))
             else
               const Text("No shared Text", style: TextStyle(fontSize: 20)),
-            const SizedBox(height: 20),
-            /*
-        const Text("Shared files:",
-            style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
-        const SizedBox(
-          width: 5,
-        ),
-        if (_sharedFiles != null && _sharedFiles!.isNotEmpty)
-          Text(_sharedFiles!.map((f) => f.path).join(", "), style: const TextStyle(fontSize: 20)),
-        if (_sharedFiles == null || _sharedFiles!.isEmpty)
-          const Text("No saved links", style: TextStyle(fontSize: 20)),*/
-            if (_textList!.isNotEmpty)
+            const SizedBox(height: 20),if (_textList.isNotEmpty)
               const Text(
                 "Saved files:",
                 style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
@@ -150,20 +131,26 @@ class _MyHomePageState extends State<MyHomePage> {
                           },
                           child: Card(
                             elevation: 3,
-                            // set the elevation to create a shadow effect
                             margin: const EdgeInsets.symmetric(vertical: 5),
                             child: ListTile(
-                              title: TextFormField(
-                                initialValue: item,
+                              title: EditableText(
+                                controller: TextEditingController(text: item),
                                 onChanged: (value) {
                                   setState(() {
-                                    _textList[index] = value;
+                                    _textList[index] = value.toString();
                                   });
                                 },
+                                backgroundCursorColor: Colors.blue,
+                                cursorColor: Colors.white,
+                                focusNode: FocusNode(),
+                                style: const TextStyle(fontSize: 20),
                               ),
                               subtitle: TextFormField(
                                 initialValue: item.length.toString(),
                                 keyboardType: TextInputType.number,
+                                decoration: const InputDecoration(
+                                  hintText: 'Enter a number',
+                                ),
                                 onChanged: (value) {
                                   setState(() {
                                     // _textList[index] = value;
@@ -184,7 +171,46 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
+/*
+            /*
+        const Text("Shared files:",
+            style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+        const SizedBox(
+          width: 5,
+        ),
+        if (_sharedFiles != null && _sharedFiles!.isNotEmpty)
+          Text(_sharedFiles!.map((f) => f.path).join(", "), style: const TextStyle(fontSize: 20)),
+        if (_sharedFiles == null || _sharedFiles!.isEmpty)
+          const Text("No saved links", style: TextStyle(fontSize: 20)),*/
+ */
 
+  /*
+      Future<void> _saveListToStorage(List<String> list) async {
+      final file = File(
+          '${(await getApplicationDocumentsDirectory()).path}/shared_text_list.txt');
+      final sink = file.openWrite();
+
+      for (final item in list) {
+        sink.writeln(item);
+      }
+
+      await sink.close();
+    }
+        //Receive files when app is running
+    _mediaStreamSubscription = ReceiveSharingIntent.getMediaStream()
+        .listen((List<SharedMediaFile> files) {
+      setState(() {
+        _sharedFiles = files;
+      });
+    });
+
+    //Receive files when app is closed
+    ReceiveSharingIntent.getInitialMedia().then((List<SharedMediaFile> files) {
+      setState(() {
+        _sharedFiles = files;
+      });
+    });
+   */
   @override
   void initState() {
     super.initState();
@@ -214,20 +240,7 @@ class _MyHomePageState extends State<MyHomePage> {
       }
     });
 
-    //Receive files when app is running
-    _mediaStreamSubscription = ReceiveSharingIntent.getMediaStream()
-        .listen((List<SharedMediaFile> files) {
-      setState(() {
-        _sharedFiles = files;
-      });
-    });
 
-    //Receive files when app is closed
-    ReceiveSharingIntent.getInitialMedia().then((List<SharedMediaFile> files) {
-      setState(() {
-        _sharedFiles = files;
-      });
-    });
   }
 
   @override

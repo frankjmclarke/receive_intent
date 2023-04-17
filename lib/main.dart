@@ -224,11 +224,11 @@ class _MyHomePageState extends State<MyHomePage> {
     //Receive text data when app is running
     _textStreamSubscription =
         ReceiveSharingIntent.getTextStream().listen((String text) {
-      setState(() {
-        _sharedText = text;
-        _addTextToListIfUnique();
-      });
-    });
+          setState(() {
+            _sharedText = text;
+            _addTextToListIfUnique();
+          });
+        });
 
     //Receive text data when app is closed
     ReceiveSharingIntent.getInitialText().then((String? text) {

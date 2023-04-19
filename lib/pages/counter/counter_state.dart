@@ -31,6 +31,12 @@ class CounterState {
       value: count ?? value,//returns the expression on its left when the it's not null
     );
   }
+
+  CounterState copyWithList({List<String>? list}) {
+    return CounterState(
+        textList: list ?? textList,//returns the expression on its left when the it's not null
+    );
+  }
   CounterState read(List<String>? list) {
     initializeTextStreamSubscription();
     return CounterState(

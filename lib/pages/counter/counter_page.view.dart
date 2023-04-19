@@ -28,12 +28,16 @@ class CounterPage extends HookConsumerWidget {
   const CounterPage({Key? key}) : super(key: key);
 
   //final MyWidgetProps props;
-
+/*
+BuildContext lets us access ancestor widgets in the widget tree
+(such as Theme.of(context) and MediaQuery.of(context)).
+WidgetRef lets us access any provider we want.
+ */
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final CounterState counterState = ref.watch(counterProvider);
+    //use ref.watch() to get the value of the provider
     final CounterNotifier counterNotifier = ref.watch(counterProvider.notifier);
-    //CounterState counterState = CounterState(textList: ['one', 'two', 'three']);
 
     return Scaffold(
        appBar: AppBar(
